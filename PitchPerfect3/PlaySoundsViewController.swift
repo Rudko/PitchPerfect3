@@ -20,14 +20,22 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
     
+    
+    //
     var recordedAudioURL: NSURL!
     var audioFile: AVAudioFile!
     var audioEngine: AVAudioEngine!
     var audioPlayerNode: AVAudioPlayerNode!
     var stopTimer: NSTimer!
-    var player: AVAudioPlayer!
+    var player: AVAudioPlayer! //
+    
+   
+    
+    
+    
     
     enum ButtonType: Int { case Slow = 0, Fast, Chipmunk, Vader, Echo, Reverb }
+    
     
     
     
@@ -62,12 +70,26 @@ class PlaySoundsViewController: UIViewController {
         super.viewDidLoad()
         print ("PlaySoundsViewController loaded")
         setupAudio()
+        
+        let sound: AVAudioPlayer!
+        var duration: NSTimeInterval {
+            get {
+                if let nonNilsound = sound {
+                    durationLabel.text =  "\(nonNilsound.duration)"
+                }
+                return 0.0
+            }
+        }
+        
+        
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         configureUI(.NotPlaying)
         
-        // MARK: - I guess this is a right place for a code providing duration of the recorded sound and transfering it to durationLabel
+        // MARK: - I guess this is a right place for a code providing duration of the recorded sound and transfering it to durationLabel. UPD: ACTUALLY IT SHOULD BE IN viewDidLoad()
     }
 
     
