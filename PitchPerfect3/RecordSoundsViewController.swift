@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 
+
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBOutlet weak var recordingLabel: UILabel!
@@ -21,14 +22,23 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         print("ViewDidLoadCalled")
     }
 
+   
+    func changeStateOfButtons(buttonLabel: String, enableStopRecordButton: Bool, enableRecordButton: Bool) {
+       recordingLabel.text = buttonLabel
+        stopRecordingButton.enabled = enableStopRecordButton
+        recordButton.enabled = enableRecordButton
+    }
+
     
     @IBAction func recordAudio(sender: AnyObject) {
     print("record button pressed")
         
- ////////////
-        recordingLabel.text = "Recording in progress"
-        stopRecordingButton.enabled = true
-        recordButton.enabled = false
+        changeStateOfButtons("Recording in progress", enableStopRecordButton: true, enableRecordButton: false)
+        
+        
+//        recordingLabel.text = "Recording in progress"
+//        stopRecordingButton.enabled = true
+//        recordButton.enabled = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
@@ -53,10 +63,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func stopRecording(sender: AnyObject) {
     print("stop recording button pressed")
 
-////////////
-        recordingLabel.text = "Tap to Record"
-        stopRecordingButton.enabled = false
-        recordButton.enabled = true
+
+        changeStateOfButtons("Tap to record", enableStopRecordButton: false, enableRecordButton: true)
+//        recordingLabel.text = "Tap to Record"
+//        stopRecordingButton.enabled = false
+//        recordButton.enabled = true
         
     
     audioRecorder.stop()

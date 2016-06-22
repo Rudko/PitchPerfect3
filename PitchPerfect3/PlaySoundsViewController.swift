@@ -71,7 +71,14 @@ class PlaySoundsViewController: UIViewController {
         print ("PlaySoundsViewController loaded")
         setupAudio()
         
-        let sound: AVAudioPlayer!
+        let asset = AVURLAsset(URL: recordedAudioURL, options: nil)
+        let audioDuration = asset.duration
+        let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
+        durationLabel.text = "\(audioDurationSeconds)"
+        // convert into minutes
+    
+        
+      /*  let sound: AVAudioPlayer!
         var duration: NSTimeInterval {
             get {
                 if let nonNilsound = sound {
@@ -79,18 +86,18 @@ class PlaySoundsViewController: UIViewController {
                 }
                 return 0.0
             }
-        }
+        }*/
         
         
         
         
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        configureUI(.NotPlaying)
+
+    /* override func viewWillAppear(animated: Bool) {
+        configureUI(.NotPlaying) 
         
         // MARK: - I guess this is a right place for a code providing duration of the recorded sound and transfering it to durationLabel. UPD: ACTUALLY IT SHOULD BE IN viewDidLoad()
-    }
+    } */
 
     
     
@@ -106,3 +113,9 @@ class PlaySoundsViewController: UIViewController {
     */
 
 }
+
+
+
+
+
+
